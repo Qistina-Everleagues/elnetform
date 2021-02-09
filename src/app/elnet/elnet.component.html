@@ -1,0 +1,62 @@
+<form *ngIf="showForm" [formGroup]="service.form" class="normal-form" (ngSubmit)="onSubmit()">
+  <mat-grid-list cols="1" rowHeight="600px">
+      <mat-grid-tile>
+          <div class="controles-container">
+          <!-- <input type="hidden" formControlName="$key"> -->
+              <h2 style="text-align: center;">Thanks for purchasing ELNET Add-ons.</h2>
+              <h3 style="text-align: center;">It will be appreciated if you can provide the following extra information.</h3>
+              <table>
+                  <tr>
+                      <td style="text-align: center;">IP Subnet/Subnet Mask<br><span style="font-size: 11px;">(e.g. 192.168.0.0/255.255.255.0)</span></td>
+                      <td>Office</td>
+                      <td>
+                          <mat-form-field>
+                              <input formControlName="office" matInput required
+                              pattern="^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$">
+                              <mat-error *ngIf="service.form.controls['office'].errors?.required">This field is mandatory.</mat-error>
+                              <mat-error *ngIf="service.form.controls['office'].errors?.pattern">Invalid IP Address.</mat-error>
+                          </mat-form-field>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td style="text-align: center;"><br>IP Subnet/Subnet Mask<br><span style="font-size: 11px;">(e.g. 192.168.0.0/255.255.255.0)</span></td>
+                      <td><br>Home</td>
+                      <td>
+                          <mat-form-field>
+                              <input formControlName="home" matInput required
+                              pattern="^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$">
+                              <mat-error *ngIf="service.form.controls['home'].errors?.required">This field is mandatory.</mat-error>
+                              <mat-error *ngIf="service.form.controls['home'].errors?.pattern">Invalid IP Address.</mat-error>
+                          </mat-form-field>
+                      </td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td>Email</td>
+                    <td>
+                      <mat-form-field>
+                          <input formControlName="email" matInput required>
+                          <mat-error *ngIf="service.form.controls['email'].errors?.required">This field is mandatory.</mat-error>
+                          <mat-error *ngIf="service.form.controls['email'].errors?.email">Invalid email address.</mat-error>
+                      </mat-form-field>
+                  </td>
+                  </tr>
+              </table>
+              <br>
+              <div style="text-align: center;" class="add-bottom-padding">
+                  <label>Will VPN IP Address 10.209.X.X cause conflicts with your office or home network?</label><br><br>
+                  <mat-radio-group formControlName="conflicts">
+                      <mat-radio-button value="Yes" required>Yes</mat-radio-button>
+                      <mat-radio-button value="No" required>No</mat-radio-button>
+                      <mat-radio-button value="Not Sure" required>Not Sure</mat-radio-button>
+                  </mat-radio-group>
+              </div><br>
+              <div style="text-align: center;" class="button-row">
+                  <button mat-raised-button color="primary" (click)="onReset()">Reset</button>
+                  <button mat-raised-button color="primary" type="submit" [disabled]="!service.form.valid">Submit</button>
+                  <button mat-raised-button color="warn" onClick="open(location, '_self').close();">Cancel</button>
+              </div>
+          </div>
+      </mat-grid-tile>
+  </mat-grid-list>
+</form>
